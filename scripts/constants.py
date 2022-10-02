@@ -2,9 +2,9 @@ STOCK_URI = "https://www1.nseindia.com/content/historical/EQUITIES/2022/SEP/cm01
 
 
 class StockColumns:
-    SERIES = "series"
-    CLOSE = "close"
-    DATE = "date"
+    SERIES = "SERIES"
+    CLOSE = "CLOSE"
+    DATE = "DATE"
 
 
 REQUIRED_STOCK_COLUMNS = [StockColumns.SERIES, StockColumns.CLOSE, StockColumns.DATE]
