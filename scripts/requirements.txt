@@ -1,3 +1,0 @@
-pyscpg2
-sqlalchemy
-pandas
