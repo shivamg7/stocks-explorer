@@ -5,7 +5,7 @@ Base = declarative_base()
 
 
 class Stocks(Base):
-    """"""
+    """Stocks ORM"""
     id = Column(Integer, primary_key=True)
     series = Column(String, nullable=False)
     closing_price = Column(Float, nullable=False)

@@ -15,7 +15,7 @@
   - `CREATE DATABASE stocks;`
   - if stocks database already exits drop it `DROP DATABASE stocks;` and create afresh
   - connect to stocks database `\c stocks`
-- Run: `python create-ddl.py`
+- Run: `python scripts/create-ddl.py`
 - Using psql
   - Check if tables are created in the database by running `\d stocks` when connected to `stocks` db
 

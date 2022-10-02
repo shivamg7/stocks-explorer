@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 import os
-from scripts.models import Base
+from app.backend.core.models import Base
 
 PGHOST = os.getenv("PGHOST")
 PGUSER = os.getenv("PGUSER")

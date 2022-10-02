@@ -24,8 +24,8 @@ import pandas as pd
 import requests as requests
 from sqlalchemy import create_engine
 
-from scripts.constants import STOCK_URI, StockColumns, REQUIRED_STOCK_COLUMNS
-from scripts.models import Stocks
+from app.scripts.constants import STOCK_URI, StockColumns, REQUIRED_STOCK_COLUMNS
+from app.backend.core.models import Stocks
 
 logger = logging.getLogger(__name__)
 logFileHandler = logging.FileHandler(
