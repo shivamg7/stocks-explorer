@@ -1,7 +1,5 @@
-from sqlalchemy.orm import declarative_base
-from sqlalchemy import Column, Integer, String, Float, DateTime, UniqueConstraint
-
-Base = declarative_base()
+from sqlalchemy import Column, Integer, String, Float, DateTime, UniqueConstraint, Date
+from app.backend.core.database import Base
 
 
 class Stocks(Base):
@@ -9,7 +7,7 @@ class Stocks(Base):
     id = Column(Integer, primary_key=True)
     series = Column(String, nullable=False)
     closing_price = Column(Float, nullable=False)
-    date = Column(DateTime, nullable=False)
+    date = Column(Date, nullable=False)
 
     __tablename__ = "stocks"
     __table_args__ = (

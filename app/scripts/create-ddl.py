@@ -1,21 +1,11 @@
-from sqlalchemy import create_engine
-import os
-from app.backend.core.models import Base
+from app.backend.core.models import Base, Stocks
+from app.backend.core.database import SessionLocal
 
-PGHOST = os.getenv("PGHOST")
-PGUSER = os.getenv("PGUSER")
-PGPORT = os.getenv("PGPORT")
-PGPASSWORD = os.getenv("PGPASSWORD")
-DATABASE_NAME = os.getenv("DATABASE_NAME")
-
-engine = create_engine(f"postgresql://{PGUSER}:{PGPASSWORD}@{PGHOST}:{PGPORT}/{DATABASE_NAME}")
-
-connection = engine.connect()
-trans = connection.begin()
+session = SessionLocal()
 try:
-    connection.execute("drop table if exists public.stocks;")
-    Base.metadata.create_all(connection)
-    trans.commit()
+    session.execute(f"drop table if exists {Stocks.__tablename__} cascade;")
+    Base.metadata.create_all(session.connection())
+    session.commit()
 except Exception as e:
-    trans.rollback()
+    session.rollback()
     raise e
