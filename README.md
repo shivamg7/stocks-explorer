@@ -38,3 +38,4 @@
   - At frontend root `cd app/frontend/stock-explorer`
   - Use command `npm run start`
   - When done making changes publish changes to production app using `npm run build`
+  - Be sure to add new files generated to git using `git add`
