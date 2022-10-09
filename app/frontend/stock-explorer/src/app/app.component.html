@@ -17,7 +17,7 @@
       <mat-label>Enter a date range</mat-label>
       <mat-date-range-input [rangePicker]="picker" [formGroup]="formGroup">
         <input matStartDate formControlName="startDate" placeholder="Start date">
-        <input matEndDate formControlName="endDate" placeholder="End date">
+        <input [max]="yesterdayDate" matEndDate formControlName="endDate" placeholder="End date">
       </mat-date-range-input>
       <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -45,6 +45,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    <span *ngIf="noStockData">No data available</span>
 
   </form>
 </div>

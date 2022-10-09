@@ -22,7 +22,6 @@ export class AppComponent {
     endDate: new FormControl<Date | null>(null),
   })
   yesterdayDate: Date | undefined;
-  closingPrice: number | undefined;
   noStockData: boolean;
   displayedColumns: string[] = ['date', 'closing_price'];
   stocksTable: Stock[];
@@ -44,7 +43,7 @@ export class AppComponent {
     this.yesterdayDate = this._getYesterdayDate();
     this.formGroup.valueChanges.subscribe(() => {
       this.noStockData = false;
-      this.closingPrice = undefined;
+      this.stocks = [];
     })
   }
 
