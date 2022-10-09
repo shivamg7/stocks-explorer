@@ -17,3 +17,19 @@ body {
   content: " ";
   display: table;
 }
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.stock-form {
+  height: 15rem;
+  justify-content: flex-start;
+
+  mat-form-field {
+    padding-top: 0.5rem;
+  }
+}

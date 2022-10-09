@@ -8,7 +8,7 @@
 
 ### Dev Environment setup
 - Install all python dependencies (recommended to create a virtualenv) `pip install -r requirements.txt`
-- Add postgres server configuration to `.env` file
+- Add/Change postgres server configuration to `.env` file
 #### Mandatory pre-request for all later steps
 - load environment variables from `.env` using `source .env`
 - load the virtual environment where python dependecies were installed `source .vent/scripts/activate`

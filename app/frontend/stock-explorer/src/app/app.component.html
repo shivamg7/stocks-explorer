@@ -2,6 +2,7 @@
   <form
   [formGroup]="formGroup"
   (ngSubmit)="onSubmit()"
+  class="flex stock-form"
   >
     <mat-form-field>
       <mat-label>Select stock</mat-label>
@@ -26,7 +27,7 @@
       Fetch stock
     </button>
 
-    <span *ngIf="closingPrice">Closing price: {{closingPrice}}</span>
-    <span *ngIf="noStockData">Stock data not found</span>
+    <span style="height: 2rem" [hidden]="!closingPrice">Closing price: {{closingPrice}}</span>
+    <span style="height: 2rem" [hidden]="!noStockData">Stock data not found</span>
   </form>
 </div>
