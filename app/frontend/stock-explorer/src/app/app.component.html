@@ -1,30 +1,32 @@
-<form
-[formGroup]="formGroup"
-(ngSubmit)="onSubmit()"
->
-  <mat-form-field>
-    <mat-label>Select stock</mat-label>
-    <mat-select formControlName="seriesControl" name="stock">
-      <mat-option *ngFor="let stock of stocks" [value]="stock.series">
-        {{stock.series}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<div id="app" class="flex">
+  <form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field>
+      <mat-label>Select stock</mat-label>
+      <mat-select formControlName="seriesControl" name="stock">
+        <mat-option *ngFor="let stock of stocks" [value]="stock.series">
+          {{stock.series}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Select date</mat-label>
-    <input [max]="yesterdayDate" matInput [matDatepicker]="picker" formControlName="dateControl">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select date</mat-label>
+      <input [max]="yesterdayDate" matInput [matDatepicker]="picker" formControlName="dateControl">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
-  <button
-  mat-flat-button
-  [disabled]="formGroup.invalid">
-    Fetch stock
-  </button>
+    <button
+    mat-flat-button
+    [disabled]="formGroup.invalid">
+      Fetch stock
+    </button>
 
-  <span *ngIf="closingPrice">Closing price: {{closingPrice}}</span>
-  <span *ngIf="noStockData">Stock data not found</span>
-</form>
+    <span *ngIf="closingPrice">Closing price: {{closingPrice}}</span>
+    <span *ngIf="noStockData">Stock data not found</span>
+  </form>
+</div>

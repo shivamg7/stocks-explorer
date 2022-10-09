@@ -36,5 +36,5 @@
 - Both frontend & backend are served using a single app
 - To start the frontend using angular (for development changes)
   - At frontend root `cd app/frontend/stock-explorer`
-  - Use command `npm run serve`
+  - Use command `npm run start`
   - When done making changes publish changes to production app using `npm run build`
