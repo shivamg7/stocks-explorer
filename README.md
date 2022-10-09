@@ -29,6 +29,7 @@
 
 # Start webserver
 - At project root `python -m uvicorn app.backend.main:app`
+- Navigate to `http://localhost:8000/` on any webbrowser
 
 
 ### Notes:
