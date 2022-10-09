@@ -29,3 +29,11 @@
 
 # Start webserver
 - At project root `python -m uvicorn app.backend.main:app`
+
+
+### Notes:
+- Both frontend & backend are served using a single app
+- To start the frontend using angular (for development changes)
+  - At frontend root `cd app/frontend/stock-explorer`
+  - Use command `npm run serve`
+  - When done, using command to build `npm run build`
