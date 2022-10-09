@@ -27,9 +27,5 @@
 - validate using `select count(1) from stocks;`
 
 
-# Start backend
+# Start webserver
 - At project root `python -m uvicorn app.backend.main:app`
-
-# Start the frontend
-- Switch to frontend root `cd app/frontend/stock-explorer`
-- Start using command `npm run serve`

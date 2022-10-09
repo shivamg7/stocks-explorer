@@ -1,8 +1,8 @@
-from typing import Union
-
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
+from starlette.responses import RedirectResponse
+from starlette.staticfiles import StaticFiles
 
 from app.backend.core import crud
 from app.backend.core.database import SessionLocal
@@ -17,6 +17,8 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+app.mount("/frontend", StaticFiles(directory="app/frontend/stock-explorer/dist/stock-explorer/"), name="ui")
+
 
 def get_db():
     """Get a session object for db transactions"""
@@ -29,7 +31,7 @@ def get_db():
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return RedirectResponse(url="/frontend/index.html")
 
 
 @app.get("/stocks")
