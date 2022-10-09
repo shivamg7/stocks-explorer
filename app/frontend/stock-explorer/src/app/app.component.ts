@@ -40,6 +40,7 @@ export class AppComponent {
     });
     this.yesterdayDate = this._getYesterdayDate();
     this.formGroup.valueChanges.subscribe(() => {
+      this.noStockData = false;
       this.closingPrice = undefined;
     })
   }
