@@ -15,7 +15,7 @@ export class AppComponent {
   stocks: Stock[];
 
   formGroup: FormGroup = new FormGroup({
-    seriesControl: new FormControl(null, [
+    symbolControl: new FormControl(null, [
       Validators.required,
     ]),
     dateControl: new FormControl(null, [Validators.required])
@@ -46,11 +46,9 @@ export class AppComponent {
   }
 
   onSubmit(): void {
-    const series = this.formGroup.get("seriesControl")?.value;
+    const symbol = this.formGroup.get("symbolControl")?.value;
     const date = moment(this.formGroup.get("dateControl")?.value).format('YYYY-MM-DD');
-    console.log(date);
-    console.log(series);
-    this.stockService.getStock(series, date).subscribe((resp: Stock) => {
+    this.stockService.getStock(symbol, date).subscribe((resp: Stock) => {
       this.closingPrice = resp.closing_price;
     },
       () => {

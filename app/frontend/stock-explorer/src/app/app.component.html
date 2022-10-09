@@ -6,9 +6,9 @@
   >
     <mat-form-field>
       <mat-label>Select stock</mat-label>
-      <mat-select formControlName="seriesControl" name="stock">
-        <mat-option *ngFor="let stock of stocks" [value]="stock.series">
-          {{stock.series}}
+      <mat-select formControlName="symbolControl" name="stock">
+        <mat-option *ngFor="let stock of stocks" [value]="stock.symbol">
+          {{stock.symbol}}
         </mat-option>
       </mat-select>
     </mat-form-field>

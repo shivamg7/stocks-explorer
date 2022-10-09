@@ -1,5 +1,5 @@
 export interface Stock {
-  series: string;
+  symbol: string;
   date: Date;
   closing_price: number;
 }

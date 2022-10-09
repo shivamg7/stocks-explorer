@@ -17,11 +17,11 @@ export class StocksService {
     return this.httpClient.get<Stock[]>(url);
   }
 
-  getStock(series: string, date: string): Observable<Stock> {
+  getStock(symbol: string, date: string): Observable<Stock> {
     const url = `${this._baseUrl}/stocks/series`;
     return this.httpClient.get<Stock>(url, {
     params: {
-      series: series,
+      symbol: symbol,
         date: date
     }
     });

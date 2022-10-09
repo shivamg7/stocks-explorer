@@ -1,7 +1,8 @@
-STOCK_URI = "https://www1.nseindia.com/content/historical/EQUITIES/2022/SEP/cm01SEP2022bhav.csv.zip"
+STOCK_URI = "https://www1.nseindia.com/content/historical/EQUITIES/{}/{}/cm{}{}{}bhav.csv.zip"
 
 
 class StockColumns:
+    SYMBOL = "SYMBOL"
     SERIES = "SERIES"
     CLOSE = "CLOSE"
     DATE = "DATE"

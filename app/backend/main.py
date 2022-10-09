@@ -36,13 +36,13 @@ def read_root():
 
 @app.get("/stocks")
 def all_stocks(db: Session = Depends(get_db)):
-    stocks = crud.get_stock_series_list(db=db)
+    stocks = crud.get_stock_symbol_list(db=db)
     return stocks
 
 
 @app.get("/stocks/series")
-def get_stock_by_series_date(series: str, date: str, db: Session = Depends(get_db)):
-    stock = crud.get_stock_by_series_date(db=db, series=series, date=date)
+def get_stock_by_series_date(symbol: str, date: str, db: Session = Depends(get_db)):
+    stock = crud.get_stock_by_symbol_date(db=db, symbol=symbol, date=date)
     if not stock:
         raise HTTPException(status_code=404, detail="data not found")
     return stock

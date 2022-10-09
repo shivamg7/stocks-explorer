@@ -88,8 +88,9 @@ class StockFetcher:
             zip_file.extract(member=member_to_extract, path=temp_dir)
             df = pd.read_csv(Path(temp_dir) / member_to_extract)
 
-        df = df[[StockColumns.SERIES, StockColumns.CLOSE]].drop_duplicates(subset=[StockColumns.SERIES])
-        df = df.dropna(subset=[StockColumns.SERIES, StockColumns.CLOSE])
+        df = df[df[StockColumns.SERIES] == "EQ"]
+        df = df[[StockColumns.SYMBOL, StockColumns.SERIES, StockColumns.CLOSE]].drop_duplicates(subset=[StockColumns.SYMBOL])
+        df = df.dropna(subset=[StockColumns.SYMBOL, StockColumns.CLOSE])
         df[StockColumns.DATE] = date
 
         logger.info(f"fetched {len(df)} sanitized records for {date}")
@@ -114,6 +115,7 @@ class StockFetcher:
     def ingest(self, stocks: pd.DataFrame) -> None:
         """Ingest stocks to DB"""
         stocks = stocks.rename(columns={
+            StockColumns.SYMBOL: Stocks.symbol.name,
             StockColumns.SERIES: Stocks.series.name,
             StockColumns.DATE: Stocks.date.name,
             StockColumns.CLOSE: Stocks.closing_price.name
@@ -166,14 +168,15 @@ if __name__ == "__main__":
         "--start_date",
         nargs="?",
         dest="start_date",
-        help="Fetch records starting this date",
+        help="Fetch records starting this date (DD-MM-YYYY)",
+        required=True
     )
 
     parser.add_argument(
         "--end_date",
         nargs="?",
         dest="end_date",
-        help="Optional: end date default: current date",
+        help="Optional: end date default: current date (DD-MM-YYYY)",
         default=datetime.datetime.now().strftime("%d-%m-%Y")
     )
 
