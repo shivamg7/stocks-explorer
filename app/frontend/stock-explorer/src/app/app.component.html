@@ -14,11 +14,14 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Select date</mat-label>
-      <input [max]="yesterdayDate" matInput [matDatepicker]="picker" formControlName="dateControl">
-      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker" [formGroup]="formGroup">
+        <input matStartDate formControlName="startDate" placeholder="Start date">
+        <input matEndDate formControlName="endDate" placeholder="End date">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
 
     <button
@@ -27,7 +30,21 @@
       Fetch stock
     </button>
 
-    <span style="height: 2rem" [hidden]="!closingPrice">Closing price: {{closingPrice}}</span>
-    <span style="height: 2rem" [hidden]="!noStockData">Stock data not found</span>
+    <table *ngIf="stocksTable.length" mat-table [dataSource]="stocksTable">
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="closing_price">
+        <th mat-header-cell *matHeaderCellDef> Closing Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.closing_price}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
   </form>
 </div>

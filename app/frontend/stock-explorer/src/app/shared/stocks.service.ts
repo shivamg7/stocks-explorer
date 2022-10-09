@@ -17,13 +17,14 @@ export class StocksService {
     return this.httpClient.get<Stock[]>(url);
   }
 
-  getStock(symbol: string, date: string): Observable<Stock> {
+  getStock(symbol: string, startDate: string, endDate: string): Observable<Stock[]> {
     const url = `${this._baseUrl}/stocks/series`;
-    return this.httpClient.get<Stock>(url, {
+    return this.httpClient.get<Stock[]>(url, {
     params: {
-      symbol: symbol,
-        date: date
-    }
+        symbol: symbol,
+        start_date: startDate,
+        end_date: endDate
+      }
     });
   }
 }

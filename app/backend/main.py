@@ -41,8 +41,8 @@ def all_stocks(db: Session = Depends(get_db)):
 
 
 @app.get("/stocks/series")
-def get_stock_by_series_date(symbol: str, date: str, db: Session = Depends(get_db)):
-    stock = crud.get_stock_by_symbol_date(db=db, symbol=symbol, date=date)
+def get_stock_by_series_date(symbol: str, start_date: str, end_date: str, db: Session = Depends(get_db)):
+    stock = crud.get_stock_by_symbol_date(db=db, symbol=symbol, start_date=start_date, end_date=end_date)
     if not stock:
         raise HTTPException(status_code=404, detail="data not found")
     return stock

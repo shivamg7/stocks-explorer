@@ -18,11 +18,14 @@ export class AppComponent {
     symbolControl: new FormControl(null, [
       Validators.required,
     ]),
-    dateControl: new FormControl(null, [Validators.required])
+    startDate: new FormControl<Date | null>(null),
+    endDate: new FormControl<Date | null>(null),
   })
   yesterdayDate: Date | undefined;
   closingPrice: number | undefined;
   noStockData: boolean;
+  displayedColumns: string[] = ['date', 'closing_price'];
+  stocksTable: Stock[];
 
   constructor(
     private stockService: StocksService
@@ -30,7 +33,7 @@ export class AppComponent {
     this.title = 'stocks-component';
     this.selectedStock = '';
     this.stocks = [];
-    this.closingPrice = undefined;
+    this.stocksTable = [];
     this.noStockData = false;
   }
 
@@ -47,9 +50,17 @@ export class AppComponent {
 
   onSubmit(): void {
     const symbol = this.formGroup.get("symbolControl")?.value;
-    const date = moment(this.formGroup.get("dateControl")?.value).format('YYYY-MM-DD');
-    this.stockService.getStock(symbol, date).subscribe((resp: Stock) => {
-      this.closingPrice = resp.closing_price;
+    const startDate = moment(this.formGroup.get("startDate")?.value).format('YYYY-MM-DD');
+    const endDate = moment(this.formGroup.get("endDate")?.value).format('YYYY-MM-DD');
+    this.stockService.getStock(symbol, startDate, endDate).subscribe((resp: Stock[]) => {
+      this.stocksTable = [];
+      for (const item of resp) {
+        this.stocksTable.push({
+          symbol: symbol,
+          date: item.date,
+          closing_price: item.closing_price
+        });
+      }
     },
       () => {
       this.noStockData = true;
