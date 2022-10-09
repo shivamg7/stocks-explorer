@@ -18,12 +18,12 @@
   - `CREATE DATABASE stocks;`
   - if stocks database already exits drop it `DROP DATABASE stocks;` and create afresh
   - connect to stocks database `\c stocks`
-- Run: `python scripts/create-ddl.py`
+- Run: `python app/scripts/create-ddl.py`
 - Using psql
   - Check if tables are created in the database by running `\d stocks` when connected to `stocks` db
 
 # Load stock data
-- command `python scripts/stock-data-fetched.py --start_date 09-09-2022`
+- command `python app/scripts/stock-data-fetcher.py --start_date 09-09-2022`
 - validate using `select count(1) from stocks;`
 
 
@@ -36,5 +36,5 @@
 - Both frontend & backend are served using a single app
 - To start the frontend using angular (for development changes)
   - At frontend root `cd app/frontend/stock-explorer`
-  - Use command `npm run serve`
-  - When done, using command to build `npm run build`
+  - Use command `npm run start`
+  - When done making changes publish changes to production app using `npm run build`

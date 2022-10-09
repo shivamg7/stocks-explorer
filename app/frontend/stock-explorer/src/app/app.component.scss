@@ -1,0 +1,19 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  line-height: 1.5;
+  font-family: "Sen", sans-serif;
+}
+#app {
+  position: relative;
+  min-height: 100%;
+  color: var(--text);
+  background: var(--bg);
+}
+
+#app:before,
+#app:after {
+  content: " ";
+  display: table;
+}
