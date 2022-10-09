@@ -17,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-app.mount("/frontend", StaticFiles(directory="app/frontend/stock-explorer/dist/stock-explorer/"), name="ui")
+app.mount("/frontend", StaticFiles(directory="app/frontend/stock-explorer/dist/stock-explorer/", html=True), name="ui")
 
 
 def get_db():
