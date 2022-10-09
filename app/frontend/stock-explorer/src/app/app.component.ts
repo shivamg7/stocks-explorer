@@ -43,7 +43,7 @@ export class AppComponent {
     this.yesterdayDate = this._getYesterdayDate();
     this.formGroup.valueChanges.subscribe(() => {
       this.noStockData = false;
-      this.stocks = [];
+      this.stocksTable = [];
     })
   }
 
