@@ -1,14 +1,8 @@
 import { Component } from '@angular/core';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
-interface Car {
-  value: string;
-  viewValue: string;
-}
+import { Stock } from './shared/stocks';
+import {StocksService} from "./shared/stocks.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-root',
@@ -16,18 +10,56 @@ interface Car {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  selectedValue: string;
-  selectedCar: string;
+  selectedStock: string;
+  title: string;
+  stocks: Stock[];
 
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
+  formGroup: FormGroup = new FormGroup({
+    seriesControl: new FormControl(null, [
+      Validators.required,
+    ]),
+    dateControl: new FormControl(null, [Validators.required])
+  })
+  yesterdayDate: Date | undefined;
+  closingPrice: number | undefined;
+  noStockData: boolean;
 
-  cars: Car[] = [
-    {value: 'volvo', viewValue: 'Volvo'},
-    {value: 'saab', viewValue: 'Saab'},
-    {value: 'mercedes', viewValue: 'Mercedes'},
-  ]
+  constructor(
+    private stockService: StocksService
+  ) {
+    this.title = 'stocks-component';
+    this.selectedStock = '';
+    this.stocks = [];
+    this.closingPrice = undefined;
+    this.noStockData = false;
+  }
+
+  ngOnInit(): void {
+    this.stockService.getStockList().subscribe((resp) => {
+      this.stocks = resp;
+    });
+    this.yesterdayDate = this._getYesterdayDate();
+    this.formGroup.valueChanges.subscribe(() => {
+      this.closingPrice = undefined;
+    })
+  }
+
+  onSubmit(): void {
+    const series = this.formGroup.get("seriesControl")?.value;
+    const date = moment(this.formGroup.get("dateControl")?.value).format('YYYY-MM-DD');
+    console.log(date);
+    console.log(series);
+    this.stockService.getStock(series, date).subscribe((resp: Stock) => {
+      this.closingPrice = resp.closing_price;
+    },
+      () => {
+      this.noStockData = true;
+      });
+  }
+
+  private _getYesterdayDate(): Date {
+    const dt = new Date();
+    dt.setDate(dt.getDate() - 1);
+    return dt
+  }
 }

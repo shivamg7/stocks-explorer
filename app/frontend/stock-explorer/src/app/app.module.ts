@@ -3,18 +3,38 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {StocksService} from "./shared/stocks.service";
+import {HttpClientModule} from "@angular/common/http";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {DateAdapter, MatNativeDateModule} from "@angular/material/core";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatButtonToggleModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [StocksService, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

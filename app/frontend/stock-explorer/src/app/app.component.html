@@ -1,23 +1,30 @@
-<form>
-  <h4>mat-select</h4>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite food</mat-label>
-    <mat-select [(ngModel)]="selectedValue" name="food">
-      <mat-option *ngFor="let food of foods" [value]="food.value">
-        {{food.viewValue}}
+<form
+[formGroup]="formGroup"
+(ngSubmit)="onSubmit()"
+>
+  <mat-form-field>
+    <mat-label>Select stock</mat-label>
+    <mat-select formControlName="seriesControl" name="stock">
+      <mat-option *ngFor="let stock of stocks" [value]="stock.series">
+        {{stock.series}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <p> Selected food: {{selectedValue}} </p>
-  <h4>native html select</h4>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite car</mat-label>
-    <select matNativeControl [(ngModel)]="selectedCar" name="car">
-      <option value="" selected></option>
-      <option *ngFor="let car of cars" [value]="car.value">
-        {{car.viewValue}}
-      </option>
-    </select>
+
+  <mat-form-field>
+    <mat-label>Select date</mat-label>
+    <input [max]="yesterdayDate" matInput [matDatepicker]="picker" formControlName="dateControl">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
-  <p> Selected car: {{selectedCar}} </p>
+
+  <button
+  mat-flat-button
+  [disabled]="formGroup.invalid">
+    Fetch stock
+  </button>
+
+  <span *ngIf="closingPrice">Closing price: {{closingPrice}}</span>
+  <span *ngIf="noStockData">Stock data not found</span>
 </form>
