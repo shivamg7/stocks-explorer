@@ -4,11 +4,14 @@
 - Postgres 13
 - Postgres command line tools *psql*
 - Python 3.9
+- Node & npm installed
 
 ### Dev Environment setup
 - Install all python dependencies (recommended to create a virtualenv) `pip install -r requirements.txt`
 - Add postgres server configuration to `.env` file
-- For all new shells load environment variables from `.env` using `source .env`
+#### Mandatory pre-request for all later steps
+- load environment variables from `.env` using `source .env`
+- load the virtual environment where python dependecies were installed `source .vent/scripts/activate`
 
 # Database setup
 - Using psql
@@ -22,3 +25,11 @@
 # Load stock data
 - command `python scripts/stock-data-fetched.py --start_date 09-09-2022`
 - validate using `select count(1) from stocks;`
+
+
+# Start backend
+- At project root `python -m uvicorn app.backend.main:app`
+
+# Start the frontend
+- Switch to frontend root `cd app/frontend/stock-explorer`
+- Start using command `npm run serve`
