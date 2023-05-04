@@ -1,0 +1,52 @@
+<div id="app" class="flex">
+  <form
+  [formGroup]="formGroup"
+  (ngSubmit)="onSubmit()"
+  class="flex stock-form"
+  >
+    <mat-form-field>
+      <mat-label>Select stock</mat-label>
+      <mat-select formControlName="symbolControl" name="stock">
+        <mat-option *ngFor="let stock of stocks" [value]="stock.symbol">
+          {{stock.symbol}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker" [formGroup]="formGroup">
+        <input matStartDate formControlName="startDate" placeholder="Start date">
+        <input [max]="yesterdayDate" matEndDate formControlName="endDate" placeholder="End date">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+
+    <button
+    mat-flat-button
+    [disabled]="formGroup.invalid">
+      Fetch stock
+    </button>
+
+    <table *ngIf="stocksTable.length" mat-table [dataSource]="stocksTable">
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="closing_price">
+        <th mat-header-cell *matHeaderCellDef> Closing Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.closing_price}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <span *ngIf="noStockData">No data available</span>
+
+  </form>
+</div>
